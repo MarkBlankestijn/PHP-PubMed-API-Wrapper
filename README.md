@@ -2,7 +2,9 @@ PHP PubMed API Wrapper
 ======================
 
 **Original author:** Asif Rahman
+
 **Fork by:** Mark Blankestijn
+
 **Demo:** [Example](http://neuralengr.com/asifr/PubMedAPI/)
 
 ## Description
