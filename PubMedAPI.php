@@ -9,12 +9,11 @@
  * 
  * See the script in action at Soterix Medical <http://soterixmedical.com/learn/publications.php>
  * 
- * Copyright (c) 2012 Asif Rahman
- * Asif Rahman <asiftr@gmail.com>
- * https://github.com/asifr
+ * Originally by Asif Rahman <asiftr@gmail.com> @ https://github.com/asifr
+ * Forked and last modified by Mark Blankestijn @ https://github.com/MarkBlankestijn
  */
 
-define('PUBMEDAPI_VERSION', '1'); // Sat 10 Nov 2012
+define('PUBMEDAPI_VERSION', '1');
 
 class PubMedAPI
 {
@@ -39,8 +38,8 @@ class PubMedAPI
 	static public $proxy_password = '';
 	static public $curl_site_url = '';
 
-	private $esearch = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?';
-	private $efetch = 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?';
+	private $esearch = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?';
+	private $efetch = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?';
 
 	public function query($term, $compact = false, $callback = false)
 	{
@@ -141,12 +140,13 @@ class PubMedAPI
 				// Compact
 				$data[] = array(
 					'pmid'			=> (string) $art->MedlineCitation->PMID,
-					'volume'		=> (string)$art->MedlineCitation->Article->Journal->JournalIssue->Volume,
-					'issue'			=> (string)$art->MedlineCitation->Article->Journal->JournalIssue->Issue,
-					'year'			=> (string)$art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Year,
-					'month'			=> (string)$art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Month,
+					'volume'		=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->Volume,
+					'issue'			=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->Issue,
+					'year'			=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Year,
+					'month'			=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Month,
+					'day'			=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Day,
 					'journal'		=> (string) $art->MedlineCitation->Article->Journal->Title,
-					'journalabbrev'	=> (string) $art->MedlineCitation->Article->Journal->ISOAbbreviation,
+					'journalabbrev'		=> (string) $art->MedlineCitation->Article->Journal->ISOAbbreviation,
 					'title'			=> (string) $art->MedlineCitation->Article->ArticleTitle,
 				);
 			} else {
@@ -191,17 +191,18 @@ class PubMedAPI
 
 				$data[] = array(
 					'pmid'			=> (string) $art->MedlineCitation->PMID,
-					'volume'		=> (string)$art->MedlineCitation->Article->Journal->JournalIssue->Volume,
-					'issue'			=> (string)$art->MedlineCitation->Article->Journal->JournalIssue->Issue,
-					'year'			=> (string)$art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Year,
-					'month'			=> (string)$art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Month,
+					'volume'		=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->Volume,
+					'issue'			=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->Issue,
+					'year'			=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Year,
+					'month'			=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Month,
+					'day'			=> (string) $art->MedlineCitation->Article->Journal->JournalIssue->PubDate->Day,
 					'pages'			=> (string) $art->MedlineCitation->Article->Pagination->MedlinePgn,
-					'issn'			=> (string)$art->MedlineCitation->Article->Journal->ISSN,
+					'issn'			=> (string) $art->MedlineCitation->Article->Journal->ISSN,
 					'journal'		=> (string) $art->MedlineCitation->Article->Journal->Title,
-					'journalabbrev'	=> (string) $art->MedlineCitation->Article->Journal->ISOAbbreviation,
+					'journalabbrev'		=> (string) $art->MedlineCitation->Article->Journal->ISOAbbreviation,
 					'title'			=> (string) $art->MedlineCitation->Article->ArticleTitle,
 					'abstract'		=> (string) $art->MedlineCitation->Article->Abstract->AbstractText,
-					'affiliation'	=> (string) $art->MedlineCitation->Article->Affiliation,
+					'affiliation'		=> (string) $art->MedlineCitation->Article->Affiliation,
 					'authors'		=> $authors,
 					'articleid'		=> implode(',',$articleid),
 					'keywords'		=> $keywords
